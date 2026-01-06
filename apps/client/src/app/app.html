@@ -6,3 +6,10 @@
 } @else {
 <router-outlet />
 }
+
+<!-- Prefetch About page images -->
+<div aria-hidden="true" style="display: none;">
+    <img src="/resources/main.jpg" alt="" fetchpriority="low">
+    <img src="/resources/bottom1.jpg" alt="" fetchpriority="low">
+    <img src="/resources/bottom2.jpg" alt="" fetchpriority="low">
+</div>

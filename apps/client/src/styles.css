@@ -11,8 +11,35 @@
 }
 
 @layer base {
+    html {
+        /* scrollbar-gutter: stable; Removed to fix blur effect */
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-primary) transparent;
+    }
+
     body {
         @apply bg-bg-base text-text-base antialiased font-mono m-0 p-0;
+    }
+
+    /* Webkit Scrollbar Styling */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--color-primary);
+        border-radius: 9999px; /* Rounded pill shape */
+        border: 2px solid transparent; /* Creates padding effect if background-clip is used, but treating as solid based on request */
+        background-clip: content-box; /* Makes the thumb look slightly smaller/floating if border is transparent */
+    }
+
+    ::-webkit-scrollbar-button {
+        display: none;
     }
 }
 
@@ -23,7 +50,6 @@
 }
 
 @keyframes blink {
-
     from,
     to {
         opacity: 1;
