@@ -8,4 +8,23 @@ import { NgOptimizedImage } from '@angular/common';
     imports: [NgIconsModule, NgOptimizedImage],
     templateUrl: `about-gallery.html`
 })
-export class AboutGallerySection { }
+export class AboutGallerySection {
+    protected images = [
+        {
+            src: '/resources/images/bottom1.jpg',
+            alt: 'Gallery photo 1'
+        },
+        {
+            src: '/resources/images/bottom2.jpg',
+            alt: 'Gallery photo 2'
+        },
+        {
+            src: '/resources/images/bottom2.jpg',
+            alt: 'Gallery photo 2'
+        },
+        {
+            src: '/resources/images/bottom2.jpg',
+            alt: 'Gallery photo 2'
+        },
+    ];
+}

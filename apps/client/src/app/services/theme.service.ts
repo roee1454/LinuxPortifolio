@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 export class ThemeService {
 
     getCurrentPrimaryColor(): string {
-        // Fallback to rose primary if variable not found
         const styles = getComputedStyle(document.documentElement);
         const color = styles.getPropertyValue('--color-primary').trim();
         return color || '#e11d48';
@@ -14,15 +13,8 @@ export class ThemeService {
         const color = baseColor || this.getCurrentPrimaryColor();
         const hsl = this.hexToHSL(color);
 
-        // Channel 1: Original color at 70% opacity
         const r = this.hslToRgba(hsl.h, hsl.s, hsl.l, 0.7);
-
-        // Channel 2: Lightness +15%, Saturation -10% at 70% opacity
-        // Ensures it's lighter and slightly desaturated
         const g = this.hslToRgba(hsl.h, Math.max(0, hsl.s - 10), Math.min(100, hsl.l + 15), 0.7);
-
-        // Channel 3: Hue +15deg, Lightness -10% at 70% opacity
-        // Shifts hue slightly for the split effect
         const b = this.hslToRgba((hsl.h + 15) % 360, hsl.s, Math.max(0, hsl.l - 10), 0.7);
 
         return { r, g, b };
@@ -30,7 +22,7 @@ export class ThemeService {
 
     private hexToHSL(hex: string): { h: number, s: number, l: number } {
         let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-        if (!result) return { h: 0, s: 0, l: 0 }; // Fallback
+        if (!result) return { h: 0, s: 0, l: 0 };
 
         let r = parseInt(result[1], 16);
         let g = parseInt(result[2], 16);

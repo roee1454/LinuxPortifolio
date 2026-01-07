@@ -1,5 +1,5 @@
-<main class="flex-1 px-0 py-8 md:px-5">
-    <div class="mx-auto max-w-6xl space-y-8 px-4 py-8 md:px-6">
+<main class="flex-1 px-0 pt-8 pb-0 md:px-5">
+    <div class="mx-auto max-w-6xl space-y-12 px-4 pt-8 pb-24 md:px-6">
         <section class="space-y-6 px-4 md:px-0">
             <h1 class="text-2xl font-bold md:text-4xl w-fit" [style.view-transition-name]="'hero-title'">
                 Hi, I'm
@@ -7,14 +7,10 @@
                     Roee Heily
                 </span>
             </h1>
-            <p class="text-text-base max-w-prose text-lg leading-relaxed">
-                I'm currently working as a Software Developer @
+            <p class="text-text-base max-w-prose text-lg leading-relaxed w-fit" [style.view-transition-name]="'hero-description'">
+                I'm a 21-year-old Software Developer @
                 <text-link content="IDF"
                     url="https://www.idf.il/%D7%90%D7%AA%D7%A8%D7%99-%D7%99%D7%97%D7%99%D7%93%D7%95%D7%AA/%D7%94%D7%97%D7%98%D7%99%D7%91%D7%94-%D7%94%D7%98%D7%9B%D7%A0%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%AA-%D7%9C%D7%99%D7%91%D7%A9%D7%94/%D7%90%D7%95%D7%93%D7%95%D7%AA/" />.
-                <br>
-                My greatest strength is my attention to detail, and my greatest weakness is attention to detail.
-                What keeps me building is the thrill of figuring out what I haven't solved yet and seeing my work
-                actually help people.
             </p>
             <div class="flex flex-row flex-wrap items-center gap-4">
                 @for (social of socials; track social.text) {
@@ -30,9 +26,11 @@
                         name="lucideArrowRight" size="14" />
                 </a>
             </div>
-            <div class="mt-4">
-                <app-experience />
+            <div class="mt-4 space-y-4">
+                <app-terminal-trigger (click)="openSkills()" />
             </div>
+            <app-experience />
+            <app-skills-section />
         </section>
     </div>
 </main>

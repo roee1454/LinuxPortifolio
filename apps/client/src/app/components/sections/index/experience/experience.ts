@@ -9,24 +9,24 @@ import { Experience } from "@/app/types";
 export class ExperienceComponent {
     protected experiences: Experience[] = [
         {
-            src: "/resources/idf-logo.png",
+            src: "/resources/icons/idf.png",
             title: "IDF",
             past: false,
             position: "Software Developer",
             descirption: "Developing cutting-edge software solutions for military applications, focusing on full-stack development and system architecture.",
-            from: new Date("2023-01-01"),
-            to: new Date(),
+            from: new Date("2023-08-08"),
+            to: new Date("2026-03-23"),
             siteUrl: "https://www.idf.il"
         },
         {
-            src: "/resources/tech-company-logo.png",
-            title: "Tech Startup",
+            src: "/resources/icons/julius.jpg",
+            title: "Julius Agency",
             past: true,
-            position: "Junior Developer",
-            descirption: "Worked on building scalable web applications using modern frameworks and contributed to the development of core features.",
-            from: new Date("2021-06-01"),
-            to: new Date("2022-12-31"),
-            siteUrl: "https://example.com"
+            position: "Software Developer",
+            descirption: "Delivered applications using Next.js and React Native, deploying web and mobile products with Github CI/CD, Firebase and Railway.",
+            from: new Date("2024-02-02"),
+            to: new Date("2024-12-31"),
+            siteUrl: "https://julius-agency.co.il/he"
         }
-    ];
+    ]; 
 }

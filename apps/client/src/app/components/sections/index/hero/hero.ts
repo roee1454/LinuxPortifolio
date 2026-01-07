@@ -1,18 +1,22 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { TextLink } from "../../../ui/typography/text-link/text-link";
 import { SocialLinkComponent } from "../../../ui/typography/social-link/social-link";
 import { Social } from "@/app/types";
 import { NgIconsModule } from "@ng-icons/core";
 import { RouterLink } from "@angular/router";
 import { ExperienceComponent } from "../experience/experience";
+import { SkillsSectionComponent } from "../skills/skills";
+import { TerminalTriggerComponent } from "../../../ui/elements/terminal-trigger/terminal-trigger";
 
 @Component({
     selector: "app-hero-component",
-    imports: [TextLink, SocialLinkComponent, NgIconsModule, RouterLink, ExperienceComponent],
+    imports: [TextLink, SocialLinkComponent, NgIconsModule, RouterLink, ExperienceComponent, SkillsSectionComponent, TerminalTriggerComponent],
     templateUrl: "hero.html"
 })
 
 export class HeroComponent {
+    @ViewChild(SkillsSectionComponent) skillsModal!: SkillsSectionComponent;
+
     protected socials = [
         {
             icon: "lucideGithub",
@@ -28,6 +32,15 @@ export class HeroComponent {
             icon: "lucideMail",
             text: "Email",
             url: "mailto:roee1454@gmail.com"
-        }
+        },
+        {
+            icon: "lucideFileText",
+            text: "Resume",
+            url: "/resources/cv.pdf"
+        },
     ] satisfies Social[]
+
+    openSkills() {
+        this.skillsModal.open();
+    }
 }

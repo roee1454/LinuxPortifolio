@@ -2,7 +2,7 @@
 
 @theme {
     --font-mono: "JetBrains Mono", "monospace";
-    --color-primary: #e11d48;
+    --color-primary: #2563eb;
     --color-bg-base: #f9f2f5;
     --color-bg-surface: #f4f4f5;
     --color-bg-container: #f6f6f6;
@@ -18,7 +18,6 @@
 
 @layer base {
     html {
-        /* scrollbar-gutter: stable; Removed to fix blur effect */
         scrollbar-width: thin;
         scrollbar-color: var(--color-primary) transparent;
         scrollbar-gutter: stable;
@@ -143,6 +142,52 @@
 
     .animate-glitch-slice {
         animation: glitch-slice 500ms steps(2, jump-none) both infinite;
+    }
+
+    @keyframes popover-in {
+        from {
+            opacity: 0;
+            transform: translateY(8px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-popover-in {
+        animation: popover-in 300ms ease-out forwards;
+    }
+
+    @keyframes typewriter {
+        from { width: 0; }
+        to { width: 9ch; }
+    }
+
+    @keyframes cursor-blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+    }
+
+    .animate-typewriter {
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        box-sizing: border-box;
+        vertical-align: bottom;
+        width: 9ch;
+        animation: typewriter 1s steps(9) forwards;
+    }
+
+    .terminal-cursor {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 8px;
+        height: 90%;
+        background-color: var(--color-primary);
+        animation: cursor-blink 0.8s step-end infinite;
     }
 
     /* Webkit Scrollbar Styling */

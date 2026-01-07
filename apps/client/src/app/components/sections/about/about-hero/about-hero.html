@@ -13,15 +13,13 @@
                 </h1>
 
                 <div class="space-y-6 text-lg text-text-muted leading-relaxed max-w-xl">
+                    <p class="text-text-base max-w-prose text-lg leading-relaxed w-fit" [style.view-transition-name]="'hero-description'">
+                I'm a 21-year-old Software Developer @
+                <text-link content="IDF"
+                    url="https://www.idf.il/%D7%90%D7%AA%D7%A8%D7%99-%D7%99%D7%97%D7%99%D7%93%D7%95%D7%AA/%D7%94%D7%97%D7%98%D7%99%D7%91%D7%94-%D7%94%D7%98%D7%9B%D7%A0%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%AA-%D7%9C%D7%99%D7%91%D7%A9%D7%94/%D7%90%D7%95%D7%93%D7%95%D7%AA/" />.
+            </p>
                     <p>
-                        I'm a 21-year-old Software Developer @ <text-link content="IDF" url=""></text-link>
-                        <br> based @ <text-link content="Tel Aviv, Israel" url=""></text-link>.
-                    </p>
-                    <p>
-                        One of my notable projects is an <popover-text trigger="Android Landscape Explorer">
-                            Due to classification (IDF), I can't name the project or
-                            display its source code publicly or reveal its reasoning.
-                        </popover-text>
+                        Some short text about my work..
                     </p>
                     <p>
                         Outside of software, I enjoy hitting the gym, drinking beer, playing 8-ball pool, and
@@ -78,7 +76,7 @@
 
                 <!-- Inner Content (Mask) -->
                 <div class="absolute inset-[4px] z-10 rounded-[calc(1.5rem-4px)] overflow-hidden bg-bg-surface">
-                    <img [ngSrc]="hasSwapped() ? '/resources/main2.png' : '/resources/main.jpg'" alt="Roee Heily"
+                    <img [ngSrc]="hasSwapped() ? '/resources/images/main2.png' : '/resources/images/main.jpg'" alt="Roee Heily"
                         class="object-cover transition-opacity duration-300" fill priority>
                 </div>
             </div>
