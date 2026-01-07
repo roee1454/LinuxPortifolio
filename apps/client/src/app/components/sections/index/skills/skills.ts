@@ -14,21 +14,29 @@ export class SkillsSectionComponent {
   protected showContent = signal(false);
 
   protected skillsCategories = [
-    {
-      name: 'Languages',
-      items: 'TypeScript, JavaScript, C/C++, Kotlin, Rust, Bash'
+    { 
+      name: "skills",
+      items: "Linux Environments, Web Dev, Android Dev, Image & Video Processing" 
     },
     {
-      name: 'Frameworks',
-      items: 'Angular, Next.js, NestJS, React, React Native'
+      name: 'Languages',
+      items: 'Python, TypeScript, C++, Kotlin, Rust, Bash, SQL'
+    },
+    {
+      name: 'Frontend',
+      items: 'Angular, React, Next.js, Jetpack Compose'
+    },
+    {
+      name: "Backend",
+      items: "Nest.js, Express.js, FastAPI, Flask"
     },
     {
       name: 'Databases',
-      items: 'PostgreSQL, Redis, Firebase, MongoDB'
+      items: 'MySQL, PostgreSQL, Redis, Firebase, MongoDB'
     },
     {
-      name: 'DevOps & Cloud',
-      items: 'GitHub Actions, Docker, Google Cloud, Railway, Cloudflare'
+      name: 'Deployment & Cloud',
+      items: 'GitHub Actions, Docker, Railway, Cloudflare, NGINX'
     }
   ];
 
@@ -41,7 +49,7 @@ export class SkillsSectionComponent {
     this.isOpen.set(true);
     this.isTyping.set(true);
     this.showContent.set(false);
-    
+
     // Simulate typing neofetch
     setTimeout(() => {
       this.isTyping.set(false);

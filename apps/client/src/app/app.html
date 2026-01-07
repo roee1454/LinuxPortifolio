@@ -1,18 +1,19 @@
 @if (!isResumePage()) {
 <div class="mx-auto flex min-h-screen max-w-[90%] flex-col md:max-w-[80%]">
+
+    <!-- Prefetch About page images -->
+    <div aria-hidden="true" style="display: none;">
+        <img src="/resources/images/main.jpg" alt="" fetchpriority="low">
+        <img src="/resources/images/main2.png" alt="" fetchpriority="low">
+        <img src="/resources/images/bottom1.jpg" alt="" fetchpriority="low">
+        <img src="/resources/images/bottom2.jpg" alt="" fetchpriority="low">
+        <img src="/resources/icons/idf.png" alt="" fetchpriority="low">
+        <img src="/resources/icons/julius.jpg" alt="" fetchpriority="low">
+    </div>
+
     <app-navbar />
     <router-outlet />
 </div>
 } @else {
 <router-outlet />
 }
-
-<!-- Prefetch About page images -->
-<div aria-hidden="true" style="display: none;">
-    <img src="/resources/images/main.jpg" alt="" fetchpriority="low">
-    <img src="/resources/images/main2.png" alt="" fetchpriority="low">
-    <img src="/resources/images/bottom1.jpg" alt="" fetchpriority="low">
-    <img src="/resources/images/bottom2.jpg" alt="" fetchpriority="low">
-    <img src="/resources/icons/idf.png" alt="" fetchpriority="low">
-    <img src="/resources/icons/julius.jpg" alt="" fetchpriority="low">
-</div>
