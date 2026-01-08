@@ -46,11 +46,11 @@ const THEMES = [
     {
         name: 'Jetbrains',
         colors: {
-            '--color-bg-base': '#1e1f22',
-            '--color-bg-surface': '#2b2d30',
-            '--color-bg-container': '#393b40',
-            '--color-text-base': '#bcbec4',
-            '--color-text-muted': '#7c7e82',
+            '--color-bg-base': '#2b2b2b',
+            '--color-bg-surface': '#313335',
+            '--color-bg-container': '#3c3f41',
+            '--color-text-base': '#a9b7c6',
+            '--color-text-muted': '#606366',
         }
     }
 ];
@@ -68,7 +68,6 @@ export class ColorChooserComponent {
     protected selectedTheme = signal<string>(THEMES[0].name);
 
     constructor() {
-        // Load saved settings from localStorage
         const savedColor = localStorage.getItem('theme-primary');
         if (savedColor) {
             this.selectedColor.set(savedColor);
@@ -79,14 +78,12 @@ export class ColorChooserComponent {
             this.selectedTheme.set(savedTheme);
         }
 
-        // Effect for Primary Color
         effect(() => {
             const color = this.selectedColor();
             document.documentElement.style.setProperty('--color-primary', color);
             localStorage.setItem('theme-primary', color);
         });
 
-        // Effect for Base Theme
         effect(() => {
             const themeName = this.selectedTheme();
             const theme = THEMES.find(t => t.name === themeName);

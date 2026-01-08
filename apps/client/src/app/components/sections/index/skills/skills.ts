@@ -20,7 +20,7 @@ export class SkillsSectionComponent {
     },
     {
       name: 'Languages',
-      items: 'Python, TypeScript, C++, Kotlin, Rust, Bash, SQL'
+      items: 'Python, TypeScript, C++, Kotlin, Bash, SQL'
     },
     {
       name: 'Frontend',
@@ -40,7 +40,7 @@ export class SkillsSectionComponent {
     },
     {
       name: 'Deployment & Cloud',
-      items: 'GitHub Actions, Docker, Railway, Cloudflare, NGINX'
+      items: 'GitHub CI/CD, Docker, Railway, Cloudflare, NGINX'
     }
   ];
 

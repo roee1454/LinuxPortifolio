@@ -3,14 +3,13 @@ import { NgIconsModule } from '@ng-icons/core';
 import { NgOptimizedImage } from '@angular/common';
 import { SocialLinkComponent } from '@/app/components/ui/typography/social-link/social-link';
 import { TextLink } from '@/app/components/ui/typography/text-link/text-link';
-import { PopoverText } from '@/app/components/ui/typography/popover-text/popover-text';
 import { ThemeService } from '@/app/services/theme.service';
 import { Social } from '@/app/types';
 
 @Component({
     selector: 'app-about-hero',
     standalone: true,
-    imports: [NgIconsModule, SocialLinkComponent, TextLink, PopoverText, NgOptimizedImage],
+    imports: [NgIconsModule, SocialLinkComponent, TextLink, NgOptimizedImage],
     templateUrl: `about-hero.html`
 })
 export class AboutHeroSection {
