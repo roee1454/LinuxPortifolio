@@ -1,13 +1,13 @@
 <div class="relative inline-block">
     <!-- Trigger Button -->
     <button (click)="togglePopover()"
-        class="group flex items-center gap-2 px-2 py-1 transition-all duration-300 hover:bg-bg-surface/50 rounded-md border border-transparent hover:border-primary/20 cursor-pointer"
+        class="group flex items-center gap-2 transition-all duration-300 hover:text-primary cursor-pointer"
         type="button">
         <!-- Company Logo -->
         <div
-            class="relative h-6 w-6 overflow-hidden rounded-md border border-text-muted/10 bg-bg-container transition-all duration-300 group-hover:border-primary/30">
+            class="relative h-6 w-6 overflow-hidden rounded-md border border-text-muted/10 bg-bg-container transition-all duration-300 ">
             <img [ngSrc]="experience().src" alt="{{ experience().title }} logo" class="h-full w-full object-cover"
-                width="24" height="24" priority />
+                width="32" height="32" priority />
         </div>
         <!-- Title and Past Indicator -->
         <div class="flex items-center gap-1.5">

@@ -3,7 +3,7 @@ import { RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/ro
 import { filter, map } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NgIconsModule } from '@ng-icons/core';
-import { ColorChooserComponent } from '../ui/elements/color-chooser/color-chooser';
+import { ColorChooserComponent } from '../color-chooser/color-chooser';
 
 @Component({
   selector: 'app-navbar',

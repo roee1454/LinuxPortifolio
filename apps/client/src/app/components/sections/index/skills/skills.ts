@@ -60,7 +60,7 @@ export class SkillsSectionComponent {
     setTimeout(() => {
       this.isTyping.set(false);
       this.showContent.set(true);
-    }, 3000);
+    }, 1750);
   }
 
   close() {

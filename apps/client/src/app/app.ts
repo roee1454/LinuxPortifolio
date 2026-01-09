@@ -1,6 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { NavbarComponent } from './components/navbar/navbar';
+import { NavbarComponent } from './components/ui/elements/navbar/navbar';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, map } from 'rxjs';
 

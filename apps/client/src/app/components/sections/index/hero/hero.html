@@ -7,10 +7,10 @@
                     Roee Heily
                 </span>
             </h1>
-            <p class="text-text-base max-w-prose text-lg leading-relaxed w-fit" [style.view-transition-name]="'hero-description'">
+            <p class="text-text-base max-w-prose text-lg leading-relaxed w-fit"
+                [style.view-transition-name]="'hero-description'">
                 I'm a 21-year-old Software Developer @
-                <text-link content="Israel, Lod"
-                    url="https://maps.app.goo.gl/LodBK2q5NZbwofKm6" />.
+                <text-link content="Israel, Lod" url="https://maps.app.goo.gl/LodBK2q5NZbwofKm6" />.
             </p>
             <div class="flex flex-row flex-wrap items-center gap-4">
                 @for (social of socials; track social.text) {
@@ -20,13 +20,13 @@
                 }
                 <a routerLink="/about"
                     class="group flex items-center gap-2 text-text-base transition-all duration-300 hover:text-primary">
-                    <span class="leading-none">Learn more about me</span>
+                    <span class="leading-none">More about me</span>
                     <ng-icon
                         class="flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1"
                         name="lucideArrowRight" size="14" />
                 </a>
             </div>
-            <div class="mt-4 space-y-4">
+            <div class="mt-4 flex items-center gap-4">
                 <app-terminal-trigger (click)="openSkills()" />
             </div>
             <app-experience />
