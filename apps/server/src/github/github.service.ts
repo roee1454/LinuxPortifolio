@@ -5,7 +5,7 @@ import {
   ForbiddenException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import type { Octokit } from 'octokit';
+import axios, { AxiosInstance } from 'axios';
 import { GithubRepo, GithubUserInfo } from '@portifolio/types';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import type { Cache } from 'cache-manager';
@@ -13,25 +13,23 @@ import { createHmac, timingSafeEqual } from 'crypto';
 
 @Injectable()
 export class GithubService {
-  private client: Octokit | null = null;
+  private axiosInstance: AxiosInstance;
 
   constructor(
     private configService: ConfigService,
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
-  ) {}
+  ) {
+    const token = this.configService.get<string>('GITHUB_ACCESS_TOKEN');
+    const userAgent = this.configService.get<string>('GITHUB_USER_AGENT');
 
-  private async getClient(): Promise<Octokit> {
-    if (this.client) return this.client;
-
-    const { Octokit } = await (eval('import("octokit")') as Promise<
-      typeof import('octokit')
-    >);
-    const client = new Octokit({
-      auth: this.configService.get<string>('GITHUB_ACCESS_TOKEN'),
-      userAgent: this.configService.get<string>('GITHUB_USER_AGENT'),
+    this.axiosInstance = axios.create({
+      baseURL: 'https://api.github.com',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'User-Agent': userAgent,
+        Accept: 'application/vnd.github.v3+json',
+      },
     });
-    this.client = client;
-    return client;
   }
 
   async handleWebhook(rawBody: Buffer, signature: string, payload: any) {
@@ -70,13 +68,14 @@ export class GithubService {
     }
 
     try {
-      const client = await this.getClient();
-      const { data: user } = await client.rest.users.getAuthenticated();
-      const { data: repos } = await client.request('GET /user/repos', {
-        visibility: 'public',
-        affiliation: 'owner',
-        sort: 'pushed',
-        direction: 'desc',
+      const { data: user } = await this.axiosInstance.get('/user');
+      const { data: repos } = await this.axiosInstance.get('/user/repos', {
+        params: {
+          visibility: 'public',
+          affiliation: 'owner',
+          sort: 'pushed',
+          direction: 'desc',
+        },
       });
 
       const result: GithubUserInfo = {
@@ -90,8 +89,10 @@ export class GithubService {
       await this.cacheManager.set(cacheKey, result, 1000 * 60 * 60 * 2);
 
       return result;
-    } catch (err) {
-      throw new InternalServerErrorException(err.message);
+    } catch (err: any) {
+      throw new InternalServerErrorException(
+        err.response?.data?.message || err.message,
+      );
     }
   }
 
@@ -100,45 +101,53 @@ export class GithubService {
     refresh: boolean = false,
   ): Promise<{ buffer: Buffer; ext: string }> {
     const cacheKey = `github:thumbnail:${repoName}`;
-    const cachedData = await this.cacheManager.get<{
-      buffer: { type: 'Buffer'; data: number[] };
-      ext: string;
-    }>(cacheKey);
+    const cachedData = await this.cacheManager.get<any>(cacheKey);
 
     if (cachedData && !refresh) {
+      const bufferValue = cachedData.buffer;
+      const buffer = Buffer.isBuffer(bufferValue)
+        ? bufferValue
+        : Buffer.from(bufferValue.data || bufferValue);
+
       return {
-        buffer: Buffer.from(cachedData.buffer.data),
+        buffer,
         ext: cachedData.ext,
       };
     }
 
     const extensions = ['png', 'jpg', 'jpeg'];
-    const client = await this.getClient();
-    const { data: user } = await client.rest.users.getAuthenticated();
 
-    for (const ext of extensions) {
-      try {
-        const { data } = await client.rest.repos.getContent({
-          owner: user.login,
-          repo: repoName,
-          path: `thumbnail/${repoName}.${ext}`,
-        });
+    try {
+      const { data: user } = await this.axiosInstance.get('/user');
 
-        if ('content' in data && typeof data.content === 'string') {
-          const result = {
-            buffer: Buffer.from(data.content, 'base64'),
-            ext,
-          };
+      for (const ext of extensions) {
+        try {
+          const { data } = await this.axiosInstance.get(
+            `/repos/${user.login}/${repoName}/contents/thumbnail/${repoName}.${ext}`,
+          );
 
-          await this.cacheManager.set(cacheKey, result, 1000 * 60 * 60 * 2);
+          if (data && typeof data.content === 'string') {
+            const result = {
+              buffer: Buffer.from(data.content, 'base64'),
+              ext,
+            };
 
-          return result;
-        }
-      } catch (err: any) {
-        if (err.status !== 404) {
-          throw new InternalServerErrorException(err.message);
+            await this.cacheManager.set(cacheKey, result, 1000 * 60 * 60 * 2);
+
+            return result;
+          }
+        } catch (err: any) {
+          if (err.response?.status !== 404) {
+            throw new InternalServerErrorException(
+              err.response?.data?.message || err.message,
+            );
+          }
         }
       }
+    } catch (err: any) {
+      throw new InternalServerErrorException(
+        err.response?.data?.message || err.message,
+      );
     }
 
     throw new InternalServerErrorException('Thumbnail not found');

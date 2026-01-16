@@ -28,9 +28,9 @@ export class GithubService {
         return URL.createObjectURL(response.data);
       },
       staleTime: 1000 * 60 * 60 * 24,
-      retry: 1,
+      retry: 0,
       retryOnMount: false,
-      gcTime: 1000 * 60 * 60, // Keep in cache for 1 hour even if unmounted
+      gcTime: 1000 * 60 * 60,
     });
   }
 }
